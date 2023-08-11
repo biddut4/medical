@@ -53,33 +53,3 @@ wow = new WOW(
       ]
     });
 });
-
-
-// smooth scrool
-const siteContainer = document.querySelector('.scrool_smooth');
-const contentContainer = document.querySelector('.page_start');
-
-let state = {
-	scroll: {
-		height: 0,
-		offset: 0,
-		speed: 0.050,
-	}
-}
-
-
-function renderLoop() {
-	// If you don't floor this value, it blows up into highp.
-  state.scroll.offset += Math.floor((window.pageYOffset - state.scroll.offset) * state.scroll.speed);
-
-  contentContainer.style.transform = `translateY(-${ state.scroll.offset }px)`;
-
-  requestAnimationFrame(renderLoop);
-}
-renderLoop();
-
-window.addEventListener('resize', function() {
-  state.scroll.height = contentContainer.getBoundingClientRect().height;
-  body.style.height = Math.floor(state.scroll.height) + "px";
-	adjustSiteContainer(siteContainer, 180);
-});
